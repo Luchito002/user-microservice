@@ -33,7 +33,7 @@ public class UserController {
     return this.userService.insertUser(userDto);
   }
 
-  @PutMapping
+  @PutMapping("edituser")
   public UserDto updateUser(@RequestBody UserDto userDto) {
     return this.userService.updateUser(userDto);
   }

@@ -3,7 +3,7 @@ package com.zectia.user_microservice.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.zectia.user_microservice.dto.UserDto;
 import com.zectia.user_microservice.exception.ResourceNotFoundException;
 import com.zectia.user_microservice.model.User;
@@ -42,10 +42,11 @@ public class UserServiceImpl implements UserService{
     User existingUser = userRepository.findById(userDto.getId())
       .orElseThrow(() -> new ResourceNotFoundException(userDto.getId()));
 
-    // Actualizar los campos del usuario existente con los datos del DTO
     existingUser.setNombres(userDto.getNombres());
     existingUser.setApellidos(userDto.getApellidos());
     existingUser.setCorreo(userDto.getCorreo());
+    existingUser.setNombreUsuario(userDto.getNombreUsuario());
+    existingUser.setClave(new BCryptPasswordEncoder().encode(userDto.getClave()));
     existingUser.setFechaNacimiento(userDto.getFechaNacimiento());
     existingUser.setUrlImagenPerfil(userDto.getUrlImagenPerfil());
     existingUser.setNumeroCelular(userDto.getNumeroCelular());

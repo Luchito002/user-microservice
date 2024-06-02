@@ -1,4 +1,5 @@
 /mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/UserMicroserviceApplication.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/config/CorsConfig.java
 /mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/config/SecurityConfig.java
 /mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/controller/UserController.java
 /mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/dto/UserDto.java
