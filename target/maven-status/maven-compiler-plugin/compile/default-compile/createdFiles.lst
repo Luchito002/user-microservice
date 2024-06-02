@@ -1,0 +1,16 @@
+com/zectia/user_microservice/security/UserDetailServiceImpl.class
+com/zectia/user_microservice/security/JWTAuthorizationFilter.class
+com/zectia/user_microservice/exception/ResourceNotFoundException.class
+com/zectia/user_microservice/dto/UserDto.class
+com/zectia/user_microservice/repository/UserRepository.class
+com/zectia/user_microservice/model/Friendship.class
+com/zectia/user_microservice/UserMicroserviceApplication.class
+com/zectia/user_microservice/security/AuthCredentials.class
+com/zectia/user_microservice/service/impl/UserServiceImpl.class
+com/zectia/user_microservice/controller/UserController.class
+com/zectia/user_microservice/model/User.class
+com/zectia/user_microservice/security/JWTAuthenticationFilter.class
+com/zectia/user_microservice/config/SecurityConfig.class
+com/zectia/user_microservice/security/TokenUtils.class
+com/zectia/user_microservice/service/UserService.class
+com/zectia/user_microservice/security/UserDetailsImpl.class

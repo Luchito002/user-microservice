@@ -1,0 +1,16 @@
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/UserMicroserviceApplication.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/config/SecurityConfig.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/controller/UserController.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/dto/UserDto.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/exception/ResourceNotFoundException.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/model/Friendship.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/model/User.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/repository/UserRepository.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/security/AuthCredentials.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/security/JWTAuthenticationFilter.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/security/JWTAuthorizationFilter.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/security/TokenUtils.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/security/UserDetailServiceImpl.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/security/UserDetailsImpl.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/service/UserService.java
+/mnt/c/users/luis/Desktop/zectia/user-microservice/src/main/java/com/zectia/user_microservice/service/impl/UserServiceImpl.java
