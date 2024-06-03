@@ -2,6 +2,8 @@ package com.zectia.user_microservice.security;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,10 +51,18 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
     String token = TokenUtils.createToken(userDetails.getUsername(), userDetails.getUsername(), userDetails.getId().toString());
 
-    response.addHeader("Authorization", "Bearer " + token);
-    response.getWriter().flush();
+    // Create a map to hold the token and write it as JSON
+    Map<String, String> tokenMap = new HashMap<>();
+    tokenMap.put("token", token);
 
-    super.successfulAuthentication(request, response, chain, authResult);
+    //response.addHeader("Authorization", "Bearer " + token);
+    //response.getWriter().flush();
+    //super.successfulAuthentication(request, response, chain, authResult);
+
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+    response.getWriter().write(new ObjectMapper().writeValueAsString(tokenMap));
+    response.getWriter().flush();
 
   }
 

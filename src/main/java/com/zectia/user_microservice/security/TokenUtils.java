@@ -16,11 +16,9 @@ import io.jsonwebtoken.security.Keys;
 
 public class TokenUtils {
 
-  private final static String ACCESS_TOKEN_SECRET = "pUXbc2xRHdP5wrRjUIVzSq9IjjHq6FQjUQEAs7bfaMHmUciUHrZbtJVM36dzM8Tg"; // Secre key
-                                                                                                                        // for
-                                                                                                                        // signing
-                                                                                                                        // the
-                                                                                                                        // token
+  // Secret key for signing the token
+  private final static String ACCESS_TOKEN_SECRET = "pUXbc2xRHdP5wrRjUIVzSq9IjjHq6FQjUQEAs7bfaMHmUciUHrZbtJVM36dzM8Tg";
+
   private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_000L; // Token validity period in seconds
 
   public static String createToken(String nombre_usuario, String correo, String id) {
