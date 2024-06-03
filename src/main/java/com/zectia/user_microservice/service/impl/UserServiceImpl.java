@@ -63,4 +63,30 @@ public class UserServiceImpl implements UserService{
     BeanUtils.copyProperties(userDto, user);
     return user;
   }
+
+  @Override
+  public String deleteUser(Long id) {
+
+    User existingUser = userRepository.findById(id)
+      .orElseThrow(() -> new ResourceNotFoundException(id));
+
+    existingUser.setEstado(false);
+
+    userRepository.save(existingUser);
+
+    return "Usuario eliminado con exito";
+  }
+
+  @Override
+  public String recoverUser(Long id) {
+
+    User existingUser = userRepository.findById(id)
+      .orElseThrow(() -> new ResourceNotFoundException(id));
+
+    existingUser.setEstado(true);
+
+    userRepository.save(existingUser);
+
+    return "Usuario recuperado con exito";
+  }
 }

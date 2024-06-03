@@ -28,7 +28,7 @@ public class UserController {
     return this.userService.findById(id);
   }
 
-  @PostMapping
+  @PostMapping("registeruser")
   public UserDto insertUser(@RequestBody UserDto userDto) {
     return this.userService.insertUser(userDto);
   }
@@ -36,6 +36,16 @@ public class UserController {
   @PutMapping("edituser")
   public UserDto updateUser(@RequestBody UserDto userDto) {
     return this.userService.updateUser(userDto);
+  }
+
+  @PutMapping("deleteuser/{id}")
+  public String deleteUser(@PathVariable Long id) {
+    return this.userService.deleteUser(id);
+  }
+
+  @PutMapping("recoveruser/{id}")
+  public String recoverUser(@PathVariable Long id) {
+    return this.userService.recoverUser(id);
   }
 
 }
