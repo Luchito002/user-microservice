@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService{
   @Override
   public UserDto insertUser(UserDto userDto) {
     User user = this.dtoToEntity(userDto);
+    user.setClave(new BCryptPasswordEncoder().encode(userDto.getClave()));
     User insertedUser = this.userRepository.save(user);
     return new UserDto(insertedUser);
   }
