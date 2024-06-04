@@ -26,7 +26,6 @@ public class TokenUtils {
     Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
     Map<String, Object> extra = new HashMap<>();
-    extra.put("nombre_usuario", nombre_usuario);
     extra.put("id_usuario", id);
 
     SecretKey secretKey = Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes());
