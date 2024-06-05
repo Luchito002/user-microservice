@@ -3,7 +3,6 @@ com/zectia/user_microservice/security/JWTAuthorizationFilter.class
 com/zectia/user_microservice/exception/ResourceNotFoundException.class
 com/zectia/user_microservice/dto/UserDto.class
 com/zectia/user_microservice/repository/UserRepository.class
-com/zectia/user_microservice/config/CorsConfig.class
 com/zectia/user_microservice/model/Friendship.class
 com/zectia/user_microservice/UserMicroserviceApplication.class
 com/zectia/user_microservice/security/AuthCredentials.class

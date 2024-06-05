@@ -1,5 +1,7 @@
 package com.zectia.user_microservice.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.zectia.user_microservice.security.JWTAuthenticationFilter;
 import com.zectia.user_microservice.security.JWTAuthorizationFilter;
@@ -29,6 +34,19 @@ public class SecurityConfig {
   }
 
   @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(Arrays.asList("*")); // Permite todos los encabezados
+    configuration.setAllowCredentials(true); // Habilita las credenciales en las solicitudes CORS
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
+
+  @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager)
       throws Exception {
     JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
@@ -36,18 +54,16 @@ public class SecurityConfig {
     jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
     return http
-        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(authRequest -> authRequest
             .requestMatchers("/usuarios/registeruser").permitAll()
-            .anyRequest()
-            .authenticated()
-        )
-        .httpBasic()
-        .and()
-        .sessionManagement(sessionManager -> sessionManager
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .requestMatchers("/login").permitAll()
+            .anyRequest().authenticated())
+        .csrf(csrf -> csrf.disable())
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .addFilter(jwtAuthenticationFilter)
         .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+        .sessionManagement(sessionManager -> sessionManager
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .build();
   }
 
