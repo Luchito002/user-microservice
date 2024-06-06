@@ -36,7 +36,12 @@ public class SecurityConfig {
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://localhost:5173"));
+    configuration.setAllowedOrigins(Arrays.asList(
+      "http://localhost:8080",
+      "http://localhost:8081",
+      "http://localhost:5173",
+      "https://community-microservice.onrender.com"
+    ));
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
     configuration.setAllowCredentials(true); // Habilita las credenciales en las solicitudes CORS
@@ -56,6 +61,7 @@ public class SecurityConfig {
     return http
         .authorizeHttpRequests(authRequest -> authRequest
             .requestMatchers("/usuarios/registeruser").permitAll()
+            .requestMatchers("/usuarios/obtener-usuarios-por-ids").permitAll()
             .requestMatchers("/login").permitAll()
             .anyRequest().authenticated())
         .csrf(csrf -> csrf.disable())

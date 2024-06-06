@@ -1,5 +1,7 @@
 package com.zectia.user_microservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zectia.user_microservice.dto.UserDto;
+import com.zectia.user_microservice.model.User;
 import com.zectia.user_microservice.service.UserService;
 
 
@@ -28,17 +31,22 @@ public class UserController {
     return this.userService.findById(id);
   }
 
+  @PostMapping("obtener-usuarios-por-ids")
+  public List<User> getUsersById(@RequestBody List<Long> userIds) {
+    return this.userService.getUsersById(userIds);
+  }
+
   @PostMapping("registeruser")
   public UserDto insertUser(@RequestBody UserDto userDto) {
     return this.userService.insertUser(userDto);
   }
 
-  @PutMapping("edituser")
+  @PutMapping("editar-usuario")
   public UserDto updateUser(@RequestBody UserDto userDto) {
     return this.userService.updateUser(userDto);
   }
 
-  @PutMapping("deleteuser/{id}")
+  @PutMapping("eliminar-usuario/{id}")
   public String deleteUser(@PathVariable Long id) {
     return this.userService.deleteUser(id);
   }
