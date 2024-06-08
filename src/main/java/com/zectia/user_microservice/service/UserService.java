@@ -8,13 +8,15 @@ import com.zectia.user_microservice.model.User;
 public interface UserService {
   UserDto findById(Long id);
 
-  UserDto insertUser(UserDto userDto);
+  String insertUser(UserDto userDto);
 
-  UserDto updateUser(UserDto userDto);
+  String updateUser(UserDto userDto);
 
   String deleteUser(Long id);
 
   String recoverUser(Long id);
+
+  List<User> getUsers();
 
   List<User> getUsersById(List<Long> userIds);
 }

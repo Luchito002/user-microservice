@@ -31,15 +31,15 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
-  public UserDto insertUser(UserDto userDto) {
+  public String insertUser(UserDto userDto) {
     User user = this.dtoToEntity(userDto);
     user.setClave(new BCryptPasswordEncoder().encode(userDto.getClave()));
-    User insertedUser = this.userRepository.save(user);
-    return new UserDto(insertedUser);
+    this.userRepository.save(user);
+    return "Registro completado exitosamente";
   }
 
   @Override
-  public UserDto updateUser(UserDto userDto) {
+  public String updateUser(UserDto userDto) {
 
   // Verificar si el usuario existe antes de actualizar
     User existingUser = userRepository.findById(userDto.getId())
@@ -56,9 +56,9 @@ public class UserServiceImpl implements UserService{
     existingUser.setRegionNumCelular(userDto.getRegionNumCelular());
     existingUser.setEstado(userDto.getEstado());
 
-    User updatedUser = userRepository.save(existingUser);
+    userRepository.save(existingUser);
 
-    return new UserDto(updatedUser);
+    return "Datos actualizados exitosamente";
   }
 
   private User dtoToEntity(UserDto userDto) {
@@ -91,6 +91,11 @@ public class UserServiceImpl implements UserService{
     userRepository.save(existingUser);
 
     return "Usuario recuperado con exito";
+  }
+
+  @Override
+  public List<User> getUsers() {
+    return userRepository.findAll();
   }
 
   @Override

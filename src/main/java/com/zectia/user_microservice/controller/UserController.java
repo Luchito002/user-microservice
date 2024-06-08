@@ -15,7 +15,6 @@ import com.zectia.user_microservice.dto.UserDto;
 import com.zectia.user_microservice.model.User;
 import com.zectia.user_microservice.service.UserService;
 
-
 @RestController
 @RequestMapping("/usuarios")
 public class UserController {
@@ -31,18 +30,23 @@ public class UserController {
     return this.userService.findById(id);
   }
 
+  @GetMapping("obtener-usuarios")
+  public List<User> getUsers() {
+    return this.userService.getUsers();
+  }
+
   @PostMapping("obtener-usuarios-por-ids")
   public List<User> getUsersById(@RequestBody List<Long> userIds) {
     return this.userService.getUsersById(userIds);
   }
 
   @PostMapping("registeruser")
-  public UserDto insertUser(@RequestBody UserDto userDto) {
+  public String insertUser(@RequestBody UserDto userDto) {
     return this.userService.insertUser(userDto);
   }
 
   @PutMapping("editar-usuario")
-  public UserDto updateUser(@RequestBody UserDto userDto) {
+  public String updateUser(@RequestBody UserDto userDto) {
     return this.userService.updateUser(userDto);
   }
 
@@ -55,5 +59,4 @@ public class UserController {
   public String recoverUser(@PathVariable Long id) {
     return this.userService.recoverUser(id);
   }
-
 }
