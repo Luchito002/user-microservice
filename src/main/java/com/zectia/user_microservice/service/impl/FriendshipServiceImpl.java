@@ -1,6 +1,7 @@
 package com.zectia.user_microservice.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,17 +35,63 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     boolean existsFriendshipRequest = friendshipRepository.existsBySenderAndReceiver(userSender, userReceiver);
 
-    if(existsFriendshipRequest) return "La solicitud de amistad ya existe";
+    if (existsFriendshipRequest)
+      return "La solicitud de amistad ya existe";
 
     Friendship newFriendship = new Friendship(
-      userSender,
-      userReceiver,
-      "pendiente",
-      LocalDate.now()
-    );
+        userSender,
+        userReceiver,
+        "pendiente",
+        LocalDate.now());
 
     friendshipRepository.save(newFriendship);
 
     return "Solicitud enviada con exito";
+  }
+
+  @Override
+  public List<Friendship> getFriendshipRequestsByUserSender(Long userSenderId) {
+    return friendshipRepository.findBySenderIdAndStatus(userSenderId, "pendiente");
+  }
+
+  @Override
+  public List<Friendship> getFriendshipRequestsByUserId(Long userReceiverId) {
+    return friendshipRepository.findByReceiverIdAndStatus(userReceiverId, "pendiente");
+  }
+
+  @Override
+  public List<Friendship> getFriendnshipsByUserId(Long userId) {
+    return friendshipRepository.findBySenderIdAndStatusOrReceiverIdAndStatus(userId, "aceptado", userId, "aceptado");
+  }
+
+  @Override
+  public String acceptRequest(Long userSenderId, Long userReceiverId) {
+
+    Friendship friendshipRequest = friendshipRepository.findBySenderIdAndReceiverId(userSenderId, userReceiverId);
+
+    if (friendshipRequest == null) {
+      return "No existe solicitud de amistad entre ambos usuarios";
+    }
+
+    friendshipRequest.setStatus("aceptado");
+
+    friendshipRepository.save(friendshipRequest);
+
+    return "Solicitud de amistad aceptada";
+  }
+
+  @Override
+  public String rejectRequest(Long userSenderId, Long userReceiverId) {
+    Friendship friendshipRequest = friendshipRepository.findBySenderIdAndReceiverId(userSenderId, userReceiverId);
+
+    if (friendshipRequest == null) {
+      return "No existe solicitud de amistad entre ambos usuarios";
+    }
+
+    friendshipRequest.setStatus("rechazado");
+
+    friendshipRepository.save(friendshipRequest);
+
+    return "Solicitud de amistad rechazada";
   }
 }
